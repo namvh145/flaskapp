@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+   <title>Student Info</title>
+
+ </head>
+ <body>
+ <h1 style="color: green">Student  Details</h1><br>
+
+ <table align="center" cellspacing = "2" cellpadding = "13" border = "10" width="700" >
+
+ <thead>
+ <td>ID</td>
+ <td>Name</td>
+ <td>Email</td>
+ <td>Gender</td>
+ <td>Contact</td>
+ <td>D.O.B</td>
+ <td>Address</td>
+
+ </thead>
+ {% for row in rows %}
+ <tr>
+ <td>{{row["id"]}}</td>
+ <td>{{row["name"]}}</td>
+ <td>{{row["email"]}}</td>
+ <td>{{row["gender"]}}</td>
+ <td>{{row["contact"]}}</td>
+ <td>{{row["dob"]}}</td>
+ <td>{{row["address"]}}</td>
+ </tr>
+ {% endfor %}   
+ </table>
+ <br><br>
+ <a href="/">Go back to home page</a>
+ </body>
+ </html> 
+ 
