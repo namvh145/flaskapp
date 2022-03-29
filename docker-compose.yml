@@ -1,12 +1,99 @@
-web:
-  restart: always
-  build: ./web
-  ports:
-    - 80
-haproxy:
-  image: tutum/haproxy
-  links:
-    - web
-  ports:
-    - 9001:80
-    - 9002:80
+version: '3'
+services:
+  flask1:
+    restart: always
+    build:
+      context: app
+      dockerfile: Dockerfile
+    container_name: flask1
+    image: hoangnam145/flask-python:3.6
+    environment:
+      APP_ENV: "prod"
+      APP_DEBUG: "False"
+      MONGODB_DATABASE: flaskdb
+      MONGODB_USERNAME: js
+      MONGODB_PASSWORD: 123js
+      MONGODB_HOSTNAME: mongodb
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+    ports:
+      - "9001:9001"
+    command: gunicorn -w 4 --bind  0.0.0.0:9001 wsgi
+  flask2:
+    restart: always
+    build:
+      context: app
+      dockerfile: Dockerfile
+    container_name: flask2
+    image: hoangnam145/flask-python:3.6
+    environment:
+      APP_ENV: "prod"
+      APP_DEBUG: "False"
+      MONGODB_DATABASE: flaskdb
+      MONGODB_USERNAME: js
+      MONGODB_PASSWORD: 123js
+      MONGODB_HOSTNAME: mongodb
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+    ports:
+      - "9002:9002"
+    command: gunicorn -w 4 --bind  0.0.0.0:9002 wsgi
+  mongodb:
+    image: mongo:4.0.8
+    container_name: mongodb
+    restart: unless-stopped
+    command: mongod --auth
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: js
+      MONGO_INITDB_ROOT_PASSWORD: 123js
+      MONGO_INITDB_DATABASE: flaskdb
+      MONGODB_DATA_DIR: /data/db
+      MONGODB_LOG_DIR: /dev/null
+    volumes:
+      - mongodbdata:/data/db
+    networks:
+      - backend
+
+  webserver:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: webserver
+    image: vuhoangnam145/webserver:lastest
+    restart: unless-stopped
+    environment:
+      APP_ENV: "prod"
+      APP_NAME: "webserver"
+      APP_DEBUG: "false"
+      SERVICE_NAME: "webserver"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - nginxdata:/var/log/nginx
+    depends_on:
+      - flask1
+      - flask2
+    networks:
+      - backend
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+  flask:
+    driver: bridge
+
+volumes:
+  mongodbdata:
+    driver: local
+  appdata:
+    driver: local
+  nginxdata:
+    driver: local
+
