@@ -50,7 +50,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: js
       MONGO_INITDB_ROOT_PASSWORD: 123js
-      MONGO_INITDB_DATABASE: flaskdb
+      MONGO_INITDB_DATABASE: student
       MONGODB_DATA_DIR: /data/db
       MONGODB_LOG_DIR: /dev/null
     volumes:
