@@ -1,13 +1,15 @@
-<!DOCTYPE html>
- <html>
- <head>
+{% extends "layout.html" %}
+
+{% block head %}
    <title>Student Info</title>
+{% endblock %}
 
- </head>
- <body>
- <h1 style="color: green">Student  Details</h1><br>
+ {% block big_title %}
+      <h1 style="color: green">Student  Details</h1><br>
+ {% endblock %}
 
- <table align="center" cellspacing = "2" cellpadding = "13" border = "10" width="700" >
+{% block content %}
+<table align="center" cellspacing = "2" cellpadding = "13" border = "10" width="700" >
 
  <thead>
  <td>ID</td>
@@ -29,10 +31,10 @@
  <td>{{row["dob"]}}</td>
  <td>{{row["address"]}}</td>
  </tr>
- {% endfor %}   
+ {% endfor %}
  </table>
  <br><br>
  <a href="/">Go back to home page</a>
- </body>
- </html> 
- 
+{% endblocks %}
+
+
