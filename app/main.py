@@ -2,8 +2,8 @@ import os
 from flask import Flask, request, jsonify, render_template
 from pymongo.mongo_client import MongoClient
 
-from app.db import StudentMongoClient
-from app.helpers import extract_info, extract_name
+from db import StudentMongoClient
+from helpers import extract_info, extract_name
 
 application = Flask(__name__, template_folder='templates')
 db_client = StudentMongoClient()
