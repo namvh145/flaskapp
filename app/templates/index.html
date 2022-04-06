@@ -1,14 +1,14 @@
-<!DOCTYPE html>
- <html>
- <head>
- <title>Home</title>
- </head>
- <body>
+{% extends "base.html" %}
 
- <br><br><h1> Student Management System </h1>
+{% block head %}
+ <title>Home</title>
+{% endblock %}
+{% block big_title %}
+    <br><br><h1> Student Management System </h1>
+{% endblock %}
+
+{% block content %}
  <br><br><a href="/add_student">Add Student</a><br><br>
  <br><br><a href="/delete_student">Delete Student </a><br><br>
  <br><br><a href ="/student_info">View Student Detials</a><br><br>
-
- </body>
- </html>
+{% endblock %}

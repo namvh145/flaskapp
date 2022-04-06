@@ -1,11 +1,14 @@
-<!DOCTYPE html>
- <html>
- <head>
-   <title>Delete Record</title>
+{% extends "base.html" %}
 
- </head>
- <body>
+{% block head %}
+   <title>Delete Record</title>
+{% endblock %}
+
+{% block big_title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
  <br><h1>{{msg}}</h1><br><br>
  <a href="/student_info">View Student Info</a>
- </body>
- </html> 
+{% endblock %}

@@ -1,12 +1,15 @@
-<!DOCTYPE html>
- <html>
- <head>
-   <title>Save details</title>
+{% extends "base.html" %}
 
- </head>
- <body>
+{% block head %}
+   <title>Save details</title>
+{% endblock %}
+
+{% block big_title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
   <br> <h1>{{msg}}</h1><br><br>
    <a href="/student_info">View Student Info</a>
- </body>   
- </html>  
+{% endblock %}
  
